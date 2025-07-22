@@ -1,0 +1,265 @@
+# =============================================================================
+# SECURITY-FIRST .gitignore for Tony's Toolbox
+# =============================================================================
+# This file prioritizes security by preventing accidental commits of sensitive
+# data, credentials, and development artifacts that could expose vulnerabilities.
+
+# =============================================================================
+# 🔐 CRITICAL SECURITY - Environment Variables & Secrets
+# =============================================================================
+# NEVER commit these - they contain API keys, database URLs, and auth tokens
+
+# Environment files (all variants)
+.env
+.env.local
+.env.development
+.env.development.local
+.env.staging
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+.environment
+
+# Service account keys & certificates
+*.pem
+*.key
+*.p12
+*.pfx
+service-account-key.json
+gcloud-service-key.json
+firebase-adminsdk-*.json
+
+# API keys and tokens (common naming patterns)
+*api-key*
+*secret*
+*token*
+*credentials*
+auth.json
+config.json
+
+# Database credentials
+database.json
+db-config.json
+connection-string.txt
+
+# =============================================================================
+# 🏗️ Tony's Toolbox Specific Security
+# =============================================================================
+
+# Claude Code development session files (contains strategy & internal docs)
+/claude/
+claude/
+
+# Local database files
+*.db
+*.sqlite
+*.sqlite3
+supabase/.branches
+supabase/.temp
+
+# Analytics & tracking keys
+posthog-config.json
+ga-config.json
+analytics-keys.json
+
+# Backup and export files (may contain sensitive data)
+*.backup
+*.dump
+*.export
+database-backup-*
+user-export-*
+analytics-export-*
+
+# =============================================================================
+# 🌐 Third-Party Integration Security
+# =============================================================================
+
+# Supabase local development
+.supabase/
+supabase/config.toml
+
+# Vercel deployment artifacts
+.vercel
+.vercel.json
+vercel.json
+
+# Railway deployment
+railway.json
+.railway/
+
+# PostHog local configs
+posthog.json
+.posthogrc
+
+# Sentry configuration
+.sentryclirc
+sentry.properties
+
+# =============================================================================
+# 💻 Development & Build Artifacts
+# =============================================================================
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+.output/
+
+# Cache directories
+.cache/
+.parcel-cache/
+.turbo/
+.swc/
+
+# =============================================================================
+# 📝 Development Files & Logs
+# =============================================================================
+
+# IDE and editor files
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Log files (may contain sensitive request data)
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# =============================================================================
+# 🧪 Testing & Debug Security
+# =============================================================================
+
+# Test artifacts that may contain real data
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+test-output/
+
+# Debug files
+debug.log
+error.log
+access.log
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# =============================================================================
+# 📱 Mobile & PWA Artifacts
+# =============================================================================
+
+# Expo
+.expo/
+.expo-shared/
+
+# PWA
+sw.js
+workbox-*.js
+precache-manifest.*.js
+
+# =============================================================================
+# ☁️ Cloud & Deployment Security
+# =============================================================================
+
+# Terraform state files (contain infrastructure secrets)
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Docker secrets
+docker-compose.override.yml
+.dockerignore
+
+# Kubernetes secrets
+*.kubeconfig
+k8s-secrets.yaml
+
+# AWS credentials
+.aws/
+aws-exports.js
+
+# =============================================================================
+# 📊 Analytics & Monitoring
+# =============================================================================
+
+# PostHog session recordings (contain user data)
+posthog-recordings/
+session-replays/
+
+# Google Analytics data
+ga-data/
+analytics-reports/
+
+# Sentry debug files
+*.sentry-debug-meta
+
+# =============================================================================
+# 🔄 Version Control & Backup
+# =============================================================================
+
+# Git backup files
+*.orig
+*.rej
+
+# Patch files
+*.patch
+*.diff
+
+# Archive files
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# =============================================================================
+# ALLOWED FILES (Explicit Comments)
+# =============================================================================
+# These files ARE committed and safe:
+# - .env.example (template without real values)
+# - /docs/ (public documentation)
+# - /.github/ (CI/CD workflows)
+# - README.md, CHANGELOG.md (public project info)
+# - package.json, package-lock.json (dependency manifests)
+
+# =============================================================================
+# 🛡️ SECURITY AUDIT CHECKLIST
+# =============================================================================
+# Before any commit, verify:
+# □ No API keys in any committed files
+# □ No database credentials in configuration
+# □ No user data in test files
+# □ No internal strategy docs in public repo
+# □ All .env files properly ignored
+# □ No service account keys committed
+# =============================================================================
