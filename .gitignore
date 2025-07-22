@@ -138,6 +138,12 @@ dist/
 ._*
 .Spotlight-V100
 .Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.fseventsd
+.DocumentRevisions-V100
+.TemporaryItems
+.apdisk
 ehthumbs.db
 Thumbs.db
 
