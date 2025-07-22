@@ -1,0 +1,3 @@
+# AI SaaS Architecture
+
+This document outlines the modular and scalable backend architecture of Tony’s Toolbox using Supabase, PostgreSQL, and AI integration pipelines...

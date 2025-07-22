@@ -1,0 +1,3 @@
+# AI SaaS 3.0 UI Patterns
+
+This document outlines modern UI design principles tailored for AI-based software experiences. It includes minimal text input, structured controls, and real-time feedback handling...

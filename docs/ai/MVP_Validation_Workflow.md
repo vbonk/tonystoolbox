@@ -1,0 +1,3 @@
+# MVP Validation Workflow
+
+Outlines how to launch with minimal features and rapidly iterate based on user feedback and behavior tracking...
