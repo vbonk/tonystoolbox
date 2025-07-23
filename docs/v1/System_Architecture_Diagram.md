@@ -22,7 +22,7 @@ Tony's Toolbox is a modular, full-stack web platform with clearly separated conc
     - Resend (emails)
         |
         v
-[ PostgreSQL (Railway) ]
+[ Supabase PostgreSQL ]
         |
         v
 [ Admin Dashboard + Auth (Supabase Auth) ]

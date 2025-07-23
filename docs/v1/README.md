@@ -22,7 +22,7 @@ pnpm dev
 
 ## 🛠 Deployment
 - Frontend: Vercel
-- Database: Railway (PostgreSQL)
+- Database: Supabase PostgreSQL
 - Automation: Supabase Edge Functions and Realtime Triggers (webhook-triggered)
 
 ## 📁 Project Structure

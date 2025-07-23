@@ -15,8 +15,8 @@
 
 ## Hosting
 - Vercel for frontend
-- Railway for PostgreSQL
-- Supabase Edge Functions and Realtime Triggers hosted externally or on Railway container
+- Supabase PostgreSQL for database
+- Supabase Edge Functions and Realtime Triggers hosted externally
 
 ## Monitoring
 - Sentry for frontend/backend observability

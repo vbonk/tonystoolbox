@@ -50,7 +50,7 @@ This is more than a portfolio — it’s a full-featured application demonstrati
 - Supabase Auth for authentication and user metadata
 
 **Database:**
-- PostgreSQL via Railway
+- Supabase PostgreSQL
 - Prisma ORM for schema, role enforcement, and migrations
 
 **DevOps & Monitoring:**
@@ -61,6 +61,6 @@ This is more than a portfolio — it’s a full-featured application demonstrati
 
 **Hosting & Integration:**
 - Vercel for frontend and SSR
-- Railway for managed DB backups
+- Supabase PostgreSQL for managed database
 - Resend/Postmark for transactional email
 - RSS.app for news aggregation

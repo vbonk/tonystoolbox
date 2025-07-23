@@ -53,6 +53,10 @@ tonystoolbox-internal/
 internal-repo-setup/
 claude/
 
+# Internal development files (should be in private repo only)
+CLAUDE.md
+DEV_WORKFLOW.md
+
 # Local database files
 *.db
 *.sqlite

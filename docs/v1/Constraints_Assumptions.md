@@ -2,7 +2,7 @@
 
 ## Constraints
 - Must use Supabase Auth (>=2.4.0) for role-based auth
-- Hosted on Vercel (frontend) and Railway (DB)
+- Hosted on Vercel (frontend) with Supabase PostgreSQL (DB)
 - Budget constraints require minimal external paid APIs
 - Supabase Edge Functions and Realtime Triggers automation required for changelog/news sync
 

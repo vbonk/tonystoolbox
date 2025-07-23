@@ -67,7 +67,7 @@ This PRD defines the MVP scope, core features, technical design, and metrics for
 ## 6. Constraints
 
 - Must use Supabase Auth (>=2.4.0)
-- Hosted on Vercel and Railway
+- Hosted on Vercel with Supabase PostgreSQL
 - No premium API usage (unless usage tiers added)
 - Free-tier RSS tools must be supported or cached
 
