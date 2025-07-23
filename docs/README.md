@@ -85,6 +85,16 @@ Comprehensive analytics and monitoring solutions for data-driven decision making
 
 Please refer to our development guidelines and contribution standards outlined in the various technical documents. Start with the [Technical Requirements](./v1/Technical_Requirements_Doc_TRD.md) to understand our coding standards and practices.
 
+### **Internal Team Access**
+
+**Core team members** also have access to the private `tonystoolbox-internal` repository which contains:
+- Business strategy and competitive analysis
+- Development context and Claude Code session logs  
+- Financial planning and internal roadmaps
+- Team processes and confidential documentation
+
+The private repository provides strategic context that informs the technical decisions made in this public repository.
+
 ## 📞 Support
 
 For questions or issues, please refer to our [User Support FAQ](./v1/User_Support_FAQ.md) or reach out through our established support channels.

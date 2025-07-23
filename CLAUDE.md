@@ -2,6 +2,15 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 🔗 Repository Context
+
+This is the **PUBLIC** repository for Tony's Toolbox. For comprehensive development context, business strategy, and sensitive information, also reference the **PRIVATE** repository:
+
+- **Public Repository** (this repo): `tonystoolbox`
+- **Private Repository**: `tonystoolbox-internal` (contains business strategy, development context, and sensitive docs)
+
+**Decision Framework**: Use public repo for technical implementation, private repo for business context and strategic decisions.
+
 ## Development Commands
 
 **Package Manager**: pnpm
@@ -55,14 +64,43 @@ npx prisma generate         # Generate Prisma client
 
 Required environment variables:
 ```bash
-CLERK_SECRET_KEY=...
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=...
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+
+# Database
 DATABASE_URL=postgresql://...
+
+# Email Service
 RESEND_API_KEY=...
 ```
 
 ## Development Workflow
 
+### **Dual Repository Strategy**
+Tony's Toolbox uses a dual-repository approach:
+
+**PUBLIC Repository** (this repo):
+- Technical implementation and features
+- Community-facing documentation
+- Open-source components and patterns
+- Bug reports and feature requests
+
+**PRIVATE Repository** (`tonystoolbox-internal`):
+- Business strategy and competitive analysis
+- Development context and session logs
+- Financial planning and internal roadmaps
+- Team processes and sensitive documentation
+
+### **Claude Code Integration**
+When working with Claude Code:
+1. Reference both repositories for complete context
+2. Implement technical changes in public repo
+3. Document strategic decisions in private repo
+4. Update session context in private repo after each session
+
+### **Standard Workflow**
 1. **Code Quality**: ESLint + Prettier for formatting, WCAG 2.1 accessibility compliance
 2. **Testing**: Unit and integration tests for auth logic and embed renderers
 3. **CI/CD**: GitHub Actions pipeline (lint → test → build → deploy)
