@@ -6,10 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the **PUBLIC** repository for Tony's Toolbox. For comprehensive development context, business strategy, and sensitive information, also reference the **PRIVATE** repository:
 
-- **Public Repository** (this repo): `tonystoolbox`
-- **Private Repository**: `tonystoolbox-internal` (contains business strategy, development context, and sensitive docs)
+- **Public Repository** (this repo): `tonystoolbox` - Technical implementation and community-facing code
+- **Private Repository**: `tonystoolbox-internal` - Business strategy, development context, and sensitive documentation
 
 **Decision Framework**: Use public repo for technical implementation, private repo for business context and strategic decisions.
+
+**⚠️ IMPORTANT**: The private repository should be managed as a separate Git repository, not as a subdirectory of this repository.
 
 ## Development Commands
 
@@ -121,3 +123,34 @@ When working with Claude Code:
 - **News Feed**: RSS.app for AI news aggregation
 - **Automation**: Supabase Edge Functions and Realtime Triggers for workflow triggers
 - **Error Tracking**: Sentry with environment-specific alerts
+
+## Current Project Status (July 2025)
+
+### ✅ Completed (Phase 0)
+- Next.js 14 application with App Router and TypeScript
+- TailwindCSS + ShadCN UI design system implementation
+- Logo integration and brand identity
+- Comprehensive component library (Logo, Cards, Buttons, etc.)
+- ESLint and Prettier configuration for code quality
+- Dual repository strategy planning and documentation
+- GitHub repository setup with CI/CD pipeline
+- Security-focused .gitignore and access controls
+
+### 🔄 Current Priority (Phase 1)
+- **Backend Integration**: Supabase authentication setup and user management
+- **Database Design**: Schema implementation for users, projects, tools, and shortlinks
+- **Core Components**: GPTEmbedViewer for tool embeds and project showcase functionality
+- **Content Restoration**: AI documentation content (currently empty placeholder files)
+- **User Experience**: Tool directory with affiliate tracking and role-based access
+
+### 📋 Next Steps
+1. **Supabase Setup**: Configure authentication, database schema, and RLS policies
+2. **AI Documentation**: Restore content for all empty AI documentation files in `/docs/ai/`
+3. **Core Features**: Implement GPT embed viewer, project showcase, and tool directory
+4. **User Management**: Role-based access control (guest/subscriber/admin)
+5. **Analytics Integration**: PostHog setup for user behavior tracking
+
+### 🚀 Future Features (Documented for Phase 3)
+- **AI Personalization System**: Comprehensive documentation preserved in private repository
+- **Advanced Analytics**: Business intelligence and conversion optimization
+- **Premium Features**: Subscription management and premium content gating

@@ -48,7 +48,9 @@ connection-string.txt
 # =============================================================================
 
 # Claude Code development session files (contains strategy & internal docs)
-/claude/
+# Internal/private repository structures (should be separate repos)
+tonystoolbox-internal/
+internal-repo-setup/
 claude/
 
 # Local database files

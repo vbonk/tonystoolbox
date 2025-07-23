@@ -5,28 +5,28 @@ This is the complete index of project documentation, organized by development ph
 ---
 
 ## 🔹 01 – Ideation
-- [Product Vision](01_Ideation/Product_Vision.md)
-- [Problem Statement](01_Ideation/Problem_Statement.md)
-- [Opportunity Landscape](01_Ideation/Opportunity_Landscape.md)
-- [User Personas](01_Ideation/User_Personas.md)
-- [Jobs To Be Done](01_Ideation/Jobs_To_Be_Done.md)
+- [Product Vision](Product_Vision.md)
+- [Problem Statement](Problem_Statement.md)
+- [Opportunity Landscape](Opportunity_Landscape.md)
+- [User Personas](User_Personas.md)
+- [Jobs To Be Done](Jobs_To_Be_Done.md)
 
 ## 🔹 02 – Planning
-- [Product Requirements Document (PRD)](02_Planning/Product_Requirements_Document_PRD.md)
-- [Use Case Matrix](02_Planning/Use_Case_Matrix.md)
-- [User Stories & Epics](02_Planning/User_Stories_Epics.md)
-- [Wireframes & UX Flows](02_Planning/Wireframes_UX_Flows.md)
-- [MoSCoW Prioritization](02_Planning/MoSCoW_Prioritization.md)
-- [Constraints & Assumptions](02_Planning/Constraints_Assumptions.md)
+- [Product Requirements Document (PRD)](Product_Requirements_Document_PRD.md)
+- [Use Case Matrix](Use_Case_Matrix.md)
+- [User Stories & Epics](User_Stories_Epics.md)
+- [Wireframes & UX Flows](Wireframes_UX_Flows.md)
+- [MoSCoW Prioritization](MoSCoW_Prioritization.md)
+- [Constraints & Assumptions](Constraints_Assumptions.md)
 
 ## 🔹 03 – Architecture
-- [System Architecture Diagram](03_Architecture/System_Architecture_Diagram.md)
-- [Data Models & Schema](03_Architecture/Data_Models_Schema.md)
-- [API Specifications](03_Architecture/API_Specifications.md)
-- [Security Model](03_Architecture/Security_Model.md)
-- [Deployment Diagram](03_Architecture/Deployment_Diagram.md)
-- [CI/CD Pipeline](03_Architecture/CI_CD_Pipeline.md)
-- [Technical Requirements Document (TRD)](03_Architecture/Technical_Requirements_Doc_TRD.md)
+- [System Architecture Diagram](System_Architecture_Diagram.md)
+- [Data Models & Schema](Data_Models_Schema.md)
+- [API Specifications](API_Specifications.md)
+- [Security Model](Security_Model.md)
+- [Deployment Diagram](Deployment_Diagram.md)
+- [CI/CD Pipeline](CI_CD_Pipeline.md)
+- [Technical Requirements Document (TRD)](Technical_Requirements_Doc_TRD.md)
 
 ## 🔹 04 – Implementation
 - [README](04_Implementation/README.md)
