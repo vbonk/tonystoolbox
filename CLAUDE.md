@@ -1,156 +1,301 @@
-# CLAUDE.md
+# CLAUDE.md - Tony's Toolbox Public Repository
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with the **PUBLIC** repository for Tony's Toolbox.
 
-## 🔗 Repository Context
+**🚨 CRITICAL CLAUDE FILE MANAGEMENT DIRECTIVES:**
+- **ALL** Claude session files, development logs, and AI context MUST be written to the **PRIVATE** repository
+- **NEVER** create, modify, or store Claude session files in this public repository
+- **ALWAYS** use absolute paths to write Claude files to: `/Users/tony/Projects/tonystoolbox-internal/claude/`
+- **VERIFY** working directory before any Claude-related file operations
 
-This is the **PUBLIC** repository for Tony's Toolbox. For comprehensive development context, business strategy, and sensitive information, also reference the **PRIVATE** repository:
+## 🔗 Repository Context & Directory Management
 
-- **Public Repository** (this repo): `tonystoolbox` - Technical implementation and community-facing code
-- **Private Repository**: `tonystoolbox-internal` - Business strategy, development context, and sensitive documentation
+This is the **PUBLIC** repository for Tony's Toolbox - a comprehensive AI tool hub and developer resource platform.
 
-**Decision Framework**: Use public repo for technical implementation, private repo for business context and strategic decisions.
+### **Repository Locations**
+- **Public Repository** (this repo): `/Users/tony/Projects/tonystoolbox` 
+  - GitHub: `https://github.com/vbonk/tonystoolbox.git` (PUBLIC)
+  - Purpose: Technical implementation, open-source code, and community-facing documentation
+- **Private Repository**: `/Users/tony/Projects/tonystoolbox-internal`
+  - GitHub: `https://github.com/vbonk/tonystoolbox-internal.git` (PRIVATE)
+  - Purpose: Business strategy, Claude session logs, development context, and sensitive documentation
 
-**⚠️ IMPORTANT**: The private repository should be managed as a separate Git repository, not as a subdirectory of this repository.
+### **Claude Code Working Directory Guidelines**
+**CRITICAL**: Always be explicit about which repository you're working in:
 
-## Development Commands
+1. **When starting any task**, explicitly check your current working directory with `pwd`
+2. **When switching between repos**, always use absolute paths:
+   ```bash
+   cd /Users/tony/Projects/tonystoolbox           # For public repo work
+   cd /Users/tony/Projects/tonystoolbox-internal  # For private repo work
+   ```
+3. **Before Git operations**, verify you're in the correct repository:
+   ```bash
+   git remote -v  # Confirm you're in the right repo
+   ```
 
-**Package Manager**: pnpm
+### **Repository Usage Decision Framework**
+
+**Use PUBLIC repo (`/Users/tony/Projects/tonystoolbox`) for:**
+- Code implementation and features
+- Component development
+- Package.json, dependencies, build configs
+- Public documentation and README files
+- Bug fixes and technical improvements
+- Open-source patterns and examples
+- Technical architecture documentation
+- User-facing help and support docs
+
+**Use PRIVATE repo (`/Users/tony/Projects/tonystoolbox-internal`) for:**
+- **ALL Claude session files and development logs**
+- Business strategy and competitive analysis
+- Financial planning and internal roadmaps
+- Team processes and sensitive documentation
+- Customer research and market analysis
+- Internal tooling and automation scripts
+- Strategic metrics and KPIs
+- Marketing plans and growth strategies
+
+**⚠️ REPOSITORY INTEGRITY RULES**:
+- **NEVER** create subdirectories with the other repo's name
+- **ALWAYS** verify working directory before Git operations
+- **ALWAYS** double-check remote URLs before pushing
+- **NEVER** commit sensitive private repo content to public repo
+- **MANDATORY**: All Claude files go to private repo only
+
+## 🏗️ Project Architecture & Stack
+
+**Tony's Toolbox** is a modern full-stack AI tool hub built with:
+
+### **Frontend Stack**
+- **Framework**: Next.js 14 with App Router and TypeScript
+- **Styling**: TailwindCSS + ShadCN UI component library
+- **Animations**: Framer Motion for smooth interactions
+- **Icons**: Lucide React icon library
+- **Responsive Design**: Mobile-first approach with accessibility (WCAG 2.1)
+
+### **Backend & Database**
+- **API**: Next.js API routes with TypeScript
+- **Database**: Supabase PostgreSQL with Prisma ORM
+- **Authentication**: Supabase Auth with role-based access control
+- **Real-time**: Supabase real-time subscriptions
+- **Edge Functions**: Supabase Edge Functions for serverless logic
+
+### **Infrastructure & Deployment**
+- **Frontend Hosting**: Vercel with automatic deployments
+- **Database**: Supabase PostgreSQL (managed)
+- **CDN**: Vercel Edge Network
+- **Domain**: Custom domain with SSL
+- **Monitoring**: Sentry for error tracking
+
+### **Authentication & User Management**
+- **Provider**: Supabase Auth
+- **User Roles**: `guest`, `subscriber`, `admin`
+- **Access Control**: Row Level Security (RLS) policies
+- **Session Management**: JWT tokens with automatic refresh
+
+## 🎯 Core Features & Components
+
+### **Primary Features**
+1. **AI Tool Directory**: Curated collection of AI tools with affiliate tracking
+2. **GPT Embed Viewer**: Sandboxed iframe system for custom GPT demonstrations
+3. **Project Showcase**: Interactive demos of AI-powered projects
+4. **News Feed**: Real-time AI industry news aggregation
+5. **Short Link System**: Branded URL shortening with analytics
+6. **User Dashboard**: Personalized experience based on subscription tier
+
+### **Key Components**
+- `GPTEmbedViewer.tsx`: Secure iframe container for GPT tool embeds
+- `NewsWall.tsx`: Real-time AI news feed with RSS fallback
+- `ShortlinkRedirect.ts`: Server-side redirects with click tracking
+- `UserDashboard.tsx`: Role-based dashboard with personalized content
+- `ToolDirectory.tsx`: Searchable/filterable AI tool catalog
+- `SubscriptionGate.tsx`: Premium content access control
+
+### **Data Models**
+- **users**: Supabase Auth integration with role metadata and preferences
+- **projects**: AI tool showcases with embed configurations and metrics
+- **tools**: AI tool directory entries with affiliate links and categories
+- **shortlinks**: Branded URL redirects with comprehensive analytics
+- **news_items**: AI industry news with categorization and trending
+- **user_interactions**: Behavioral tracking for personalization
+
+## 🛠️ Development Commands & Setup
+
+**Package Manager**: pnpm (required)
 ```bash
+# Development
 pnpm install        # Install dependencies
 pnpm dev            # Start development server (http://localhost:3000)
 pnpm build          # Build for production
+pnpm start          # Start production server
 pnpm lint           # Run ESLint + Prettier
+pnpm lint:fix       # Fix linting issues automatically
+pnpm type-check     # Run TypeScript compiler check
 pnpm test           # Run unit and integration tests
+pnpm test:watch     # Run tests in watch mode
 ```
 
 **Database Commands**:
 ```bash
-npx prisma migrate dev      # Apply Prisma migrations (development)
-npx prisma migrate deploy   # Apply Prisma migrations (production)
+# Supabase local development
+npx supabase start          # Start local Supabase stack
+npx supabase stop           # Stop local Supabase stack  
+npx supabase status         # Check local services status
+npx supabase db reset       # Reset local database
+npx supabase gen types      # Generate TypeScript types
+
+# Prisma ORM
 npx prisma generate         # Generate Prisma client
+npx prisma db push          # Push schema changes to database
+npx prisma migrate dev      # Create and apply new migration
+npx prisma studio           # Open Prisma Studio (database GUI)
 ```
 
-## Architecture Overview
+## 🔐 Environment Configuration
 
-**Tony's Toolbox** is a full-stack AI tool hub built with Next.js (App Router), featuring:
-
-- **Frontend**: Next.js + TailwindCSS + ShadCN UI + Framer Motion
-- **Backend**: Next.js API routes + Supabase (DB + Auth) + Prisma ORM
-- **Database**: PostgreSQL (Railway) with role-based access control
-- **Hosting**: Vercel (frontend) + Railway (database)
-- **Auth**: Supabase Auth with role metadata (guest/subscriber/admin)
-- **Automation**: Supabase Edge Functions and Realtime Triggers
-- **Monitoring**: Sentry + UptimeRobot
-
-## Key Features & Components
-
-### Authentication & Authorization
-- Uses Supabase Auth for user management
-- Role-based access: `guest`, `subscriber`, `admin`
-- Gated content for premium subscribers
-- Row Level Security (RLS) implemented
-
-### Core Data Models
-- **users**: Supabase Auth integration with role metadata
-- **projects**: AI tool showcases with embeddable GPT demos
-- **tools**: Affiliate tool directory with click tracking
-- **shortlinks**: Tracked redirect URLs for analytics
-
-### Key Components
-- `GPTEmbedViewer.tsx`: Sandboxed iframe for GPT tool embeds
-- `NewsWall.tsx`: Real-time AI news feed with RSS fallback
-- `ShortlinkRedirect.ts`: Server-side redirects with analytics
-
-## Environment Setup
-
-Required environment variables:
+**Required Environment Variables**:
 ```bash
 # Supabase Configuration
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
-# Database
-DATABASE_URL=postgresql://...
+# Database Connection
+DATABASE_URL=postgresql://postgres:[password]@db.supabase.co:5432/postgres
 
-# Email Service
-RESEND_API_KEY=...
+# External Services
+RESEND_API_KEY=re_...                    # Email service
+POSTHOG_API_KEY=phc_...                  # Analytics (optional)
+SENTRY_DSN=https://...                   # Error tracking
+NEXT_PUBLIC_SITE_URL=https://tonystoolbox.com
+
+# Development
+NODE_ENV=development|production
+NEXT_PUBLIC_APP_ENV=development|staging|production
 ```
 
-## Development Workflow
-
-### **Dual Repository Strategy**
-Tony's Toolbox uses a dual-repository approach:
-
-**PUBLIC Repository** (this repo):
-- Technical implementation and features
-- Community-facing documentation
-- Open-source components and patterns
-- Bug reports and feature requests
-
-**PRIVATE Repository** (`tonystoolbox-internal`):
-- Business strategy and competitive analysis
-- Development context and session logs
-- Financial planning and internal roadmaps
-- Team processes and sensitive documentation
+## 🧪 Development Workflow
 
 ### **Claude Code Integration**
 When working with Claude Code:
-1. Reference both repositories for complete context
-2. Implement technical changes in public repo
-3. Document strategic decisions in private repo
-4. Update session context in private repo after each session
 
-### **Standard Workflow**
-1. **Code Quality**: ESLint + Prettier for formatting, WCAG 2.1 accessibility compliance
-2. **Testing**: Unit and integration tests for auth logic and embed renderers
-3. **CI/CD**: GitHub Actions pipeline (lint → test → build → deploy)
-4. **Deployment**: Automatic Vercel deployment on push to main
-5. **Monitoring**: Sentry for error tracking, automated release notifications
+**Session Start Protocol:**
+1. **Always start by checking current working directory**: `pwd`  
+2. **Verify which repository you're in**: `git remote -v`
+3. **Reference both repositories for complete context**
+4. **ALL Claude session files MUST go to private repo**
 
-## Security Considerations
+**Repository-Specific Workflows:**
+- **Technical Implementation** (Public Repo):
+  ```bash
+  cd /Users/tony/Projects/tonystoolbox
+  git remote -v  # Should show: https://github.com/vbonk/tonystoolbox.git
+  # Implement features, fix bugs, update components, documentation
+  ```
+- **Claude Session Documentation** (Private Repo):
+  ```bash
+  cd /Users/tony/Projects/tonystoolbox-internal
+  git remote -v  # Should show: https://github.com/vbonk/tonystoolbox-internal.git
+  # Document sessions, strategic decisions, development context
+  ```
 
-- All GPT embeds use iframe sandboxing for security
-- Rate limiting on shortlink redirects to prevent abuse
-- Supabase RLS policies enforce role-based data access
-- No sensitive data (API keys, tokens) in client-side code
+**Cross-Repository Context:**
+- Read context from both repos but work in the appropriate one
+- Use absolute paths when referencing files from the other repo
+- Never assume current directory - always verify before operations
+- **CRITICAL**: All Claude development logs go to private repo only
 
-## Integration Points
+### **Quality Assurance Standards**
+1. **Code Quality**: ESLint + Prettier for consistent formatting
+2. **Accessibility**: WCAG 2.1 AA compliance for all public interfaces
+3. **Type Safety**: Strict TypeScript configuration with no implicit any
+4. **Testing**: Unit tests for business logic, integration tests for API routes
+5. **Performance**: Core Web Vitals optimization, <2s load times
+6. **Security**: Input validation, XSS prevention, secure authentication flows
 
-- **Email**: Resend/Postmark for transactional emails
-- **Analytics**: PostHog for behavioral tracking (optional)
-- **News Feed**: RSS.app for AI news aggregation
-- **Automation**: Supabase Edge Functions and Realtime Triggers for workflow triggers
-- **Error Tracking**: Sentry with environment-specific alerts
+### **Git Workflow**
+```bash
+# Feature development
+git checkout -b feature/feature-name
+git add .
+git commit -m "feat: descriptive commit message"
+git push origin feature/feature-name
 
-## Current Project Status (July 2025)
+# Code review and merge via GitHub PR
+# Automatic deployment via Vercel on merge to main
+```
 
-### ✅ Completed (Phase 0)
+## 🚀 Current Project Status (January 2025)
+
+### ✅ Completed Infrastructure
 - Next.js 14 application with App Router and TypeScript
-- TailwindCSS + ShadCN UI design system implementation
-- Logo integration and brand identity
-- Comprehensive component library (Logo, Cards, Buttons, etc.)
+- TailwindCSS + ShadCN UI design system implementation  
+- Logo integration and comprehensive brand identity
+- Component library (Logo, Cards, Buttons, Forms, Navigation)
 - ESLint and Prettier configuration for code quality
-- Dual repository strategy planning and documentation
-- GitHub repository setup with CI/CD pipeline
-- Security-focused .gitignore and access controls
+- Dual repository strategy with security-focused .gitignore
+- GitHub repository setup with automated CI/CD pipeline
+- Supabase PostgreSQL integration (replacing Railway)
 
-### 🔄 Current Priority (Phase 1)
-- **Backend Integration**: Supabase authentication setup and user management
-- **Database Design**: Schema implementation for users, projects, tools, and shortlinks
-- **Core Components**: GPTEmbedViewer for tool embeds and project showcase functionality
-- **Content Restoration**: AI documentation content (currently empty placeholder files)
-- **User Experience**: Tool directory with affiliate tracking and role-based access
+### 🔄 Current Development Focus
+- **Authentication System**: Complete Supabase Auth integration with role-based access
+- **Core Components**: GPTEmbedViewer for secure tool demonstrations
+- **Content Management**: AI tool directory with affiliate link tracking
+- **User Experience**: Responsive design with accessibility compliance
+- **Real-time Features**: Live news feed and user interaction tracking
 
-### 📋 Next Steps
-1. **Supabase Setup**: Configure authentication, database schema, and RLS policies
-2. **AI Documentation**: Restore content for all empty AI documentation files in `/docs/ai/`
-3. **Core Features**: Implement GPT embed viewer, project showcase, and tool directory
-4. **User Management**: Role-based access control (guest/subscriber/admin)
-5. **Analytics Integration**: PostHog setup for user behavior tracking
+### 📋 Immediate Next Steps
+1. **Database Schema**: Complete user, project, and tool table implementations
+2. **Authentication Flow**: Implement sign-up, sign-in, and role assignment
+3. **Content Population**: Add initial AI tool directory entries
+4. **GPT Integration**: Secure iframe embedding system for custom GPTs
+5. **Analytics Setup**: PostHog integration for user behavior tracking
+6. **Performance Optimization**: Core Web Vitals compliance and optimization
 
-### 🚀 Future Features (Documented for Phase 3)
-- **AI Personalization System**: Comprehensive documentation preserved in private repository
-- **Advanced Analytics**: Business intelligence and conversion optimization
-- **Premium Features**: Subscription management and premium content gating
+### 🎯 Strategic Objectives
+- **Community Building**: Foster an engaged community of AI tool users
+- **Revenue Generation**: Sustainable affiliate commission model
+- **User Value**: Become the go-to resource for AI tool discovery
+- **Technical Excellence**: Maintain high code quality and performance standards
+- **Scalability**: Architecture that supports rapid user growth
+
+## 📚 Integration Points & External Services
+
+### **Email & Communications**
+- **Transactional Email**: Resend for auth confirmations and notifications
+- **Newsletter**: ConvertKit integration for community updates
+- **Support**: Integrated help desk with Supabase backend
+
+### **Analytics & Monitoring**
+- **User Analytics**: PostHog for behavioral insights and feature usage
+- **Performance Monitoring**: Sentry for error tracking and performance
+- **Uptime Monitoring**: UptimeRobot for service availability
+- **Database Analytics**: Supabase built-in analytics dashboard
+
+### **Content & Media**
+- **Image Optimization**: Next.js Image component with Vercel optimization
+- **CDN**: Vercel Edge Network for global content delivery
+- **News Aggregation**: RSS.app for AI industry news feeds
+- **SEO**: Next.js sitemap generation and meta tag optimization
+
+## 🛡️ Security Considerations
+
+- **Authentication Security**: Supabase Auth with JWT tokens and secure session management
+- **Data Protection**: Row Level Security (RLS) policies for multi-tenant data isolation
+- **Input Validation**: Server-side validation for all user inputs and API routes
+- **XSS Prevention**: Content Security Policy headers and input sanitization
+- **Rate Limiting**: API endpoint protection against abuse and DDoS
+- **Iframe Security**: Sandbox attributes and domain restrictions for GPT embeds
+- **Environment Security**: Secure secret management and environment variable protection
+
+## 📖 Documentation Standards
+
+All public documentation should be:
+- **Clear and Concise**: Easy to understand for developers of all skill levels
+- **Up-to-Date**: Regularly maintained and synchronized with codebase changes
+- **Comprehensive**: Cover both basic usage and advanced configuration
+- **Accessible**: Follow documentation accessibility guidelines
+- **Searchable**: Structured for easy discovery and navigation
+
+**Remember**: This is a PUBLIC repository - keep sensitive business information, API keys, and strategic documents in the private repository at all times.
