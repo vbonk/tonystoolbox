@@ -61,18 +61,15 @@ Comprehensive analytics and monitoring solutions for data-driven decision making
 ### Product Development
 - **[Product Requirements](./v1/Product_Requirements_Document_PRD.md)** - Detailed product requirements and specifications
 - **[User Stories & Epics](./v1/User_Stories_Epics.md)** - Agile development user stories and epic planning
-- **[Roadmap](./v1/Roadmap.md)** - Product development roadmap and milestone planning
 - **[MoSCoW Prioritization](./v1/MoSCoW_Prioritization.md)** - Feature prioritization framework
 
 ### User Experience
 - **[User Personas](./v1/User_Personas.md)** - Target user profiles and behavioral insights
 - **[Wireframes & UX Flows](./v1/Wireframes_UX_Flows.md)** - User interface design and user experience workflows
-- **[A/B Testing Plans](./v1/AB_Testing_Plans.md)** - Feature testing and optimization strategies
 
 ### Performance & Monitoring
 - **[Performance Reports](./v1/Performance_Reports.md)** - Application performance metrics and optimization
 - **[Monitoring Plan](./v1/Monitoring_Plan.md)** - System health monitoring and alerting strategies
-- **[Strategic Metrics](./v1/Strategic_Metrics.md)** - Business metrics and KPI tracking
 
 ## 🚀 Quick Start
 
@@ -101,4 +98,4 @@ For questions or issues, please refer to our [User Support FAQ](./v1/User_Suppor
 
 ---
 
-*Last updated: July 2025*
+*Last updated: January 2025*
