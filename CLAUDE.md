@@ -74,25 +74,26 @@ This is the **PUBLIC** repository for Tony's Toolbox - a comprehensive AI tool h
 - **Icons**: Lucide React icon library
 - **Responsive Design**: Mobile-first approach with accessibility (WCAG 2.1)
 
-### **Backend & Database**
-- **API**: Next.js API routes with TypeScript
-- **Database**: Supabase PostgreSQL with Prisma ORM
-- **Authentication**: Supabase Auth with role-based access control
-- **Real-time**: Supabase real-time subscriptions
-- **Edge Functions**: Supabase Edge Functions for serverless logic
+### **Backend & Database (Updated January 24, 2025)**
+- **API**: Next.js API routes with TypeScript (in development)
+- **Database**: PostgreSQL on Hetzner via Coolify with Prisma ORM ✅ **IMPLEMENTED**
+- **Authentication**: Clerk.dev with role-based access control (UI pending)
+- **ORM**: Prisma with 11 comprehensive models ✅ **IMPLEMENTED**
+- **Type Safety**: Full TypeScript integration with Prisma-generated types ✅ **IMPLEMENTED**
+- **Development Tools**: Prisma Studio, seeding scripts, automated setup ✅ **IMPLEMENTED**
 
 ### **Infrastructure & Deployment**
-- **Frontend Hosting**: Vercel with automatic deployments
-- **Database**: Supabase PostgreSQL (managed)
-- **CDN**: Vercel Edge Network
-- **Domain**: Custom domain with SSL
-- **Monitoring**: Sentry for error tracking
+- **Full-Stack Hosting**: Coolify on Hetzner infrastructure
+- **Database**: Self-hosted PostgreSQL via Coolify
+- **CDN**: Cloudflare proxy and R2 storage
+- **Domain**: Custom domain with Cloudflare SSL
+- **Monitoring**: Sentry for error tracking + Coolify metrics
 
 ### **Authentication & User Management**
-- **Provider**: Supabase Auth
+- **Provider**: Clerk.dev
 - **User Roles**: `guest`, `subscriber`, `admin`
-- **Access Control**: Row Level Security (RLS) policies
-- **Session Management**: JWT tokens with automatic refresh
+- **Access Control**: Custom middleware with role-based permissions
+- **Session Management**: Clerk.dev JWT tokens with automatic refresh
 
 ## 🎯 Core Features & Components
 
@@ -113,7 +114,7 @@ This is the **PUBLIC** repository for Tony's Toolbox - a comprehensive AI tool h
 - `SubscriptionGate.tsx`: Premium content access control
 
 ### **Data Models**
-- **users**: Supabase Auth integration with role metadata and preferences
+- **users**: Clerk.dev integration with role metadata and preferences
 - **projects**: AI tool showcases with embed configurations and metrics
 - **tools**: AI tool directory entries with affiliate links and categories
 - **shortlinks**: Branded URL redirects with comprehensive analytics
@@ -136,33 +137,37 @@ pnpm test           # Run unit and integration tests
 pnpm test:watch     # Run tests in watch mode
 ```
 
-**Database Commands**:
+**Database Commands (Updated January 24, 2025)**:
 ```bash
-# Supabase local development
-npx supabase start          # Start local Supabase stack
-npx supabase stop           # Stop local Supabase stack  
-npx supabase status         # Check local services status
-npx supabase db reset       # Reset local database
-npx supabase gen types      # Generate TypeScript types
+# Quick Setup
+npm run setup               # Complete database setup (recommended for new setup)
 
-# Prisma ORM
+# Development Database Management
+npm run db:generate         # Generate Prisma client
+npm run db:push             # Push schema changes to database
+npm run db:migrate          # Create and apply new migration
+npm run db:deploy           # Deploy migrations to production
+npm run db:studio           # Open Prisma Studio (database GUI)
+npm run db:seed             # Run database seeding scripts
+npm run db:reset            # Reset database and reseed with sample data
+
+# Direct Prisma Commands (alternative)
 npx prisma generate         # Generate Prisma client
 npx prisma db push          # Push schema changes to database
-npx prisma migrate dev      # Create and apply new migration
-npx prisma studio           # Open Prisma Studio (database GUI)
 ```
 
 ## 🔐 Environment Configuration
 
 **Required Environment Variables**:
 ```bash
-# Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+# Clerk.dev Authentication
+CLERK_SECRET_KEY=sk_test_xxx
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_xxx
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 
-# Database Connection
-DATABASE_URL=postgresql://postgres:[password]@db.supabase.co:5432/postgres
+# Hetzner PostgreSQL (via Coolify)
+DATABASE_URL=postgresql://postgres:password@hetzner-host:5432/tonystoolbox
 
 # External Services
 RESEND_API_KEY=re_...                    # Email service
@@ -228,7 +233,7 @@ git push origin feature/feature-name
 
 ## 🚀 Current Project Status (January 2025)
 
-### ✅ Completed Infrastructure
+### ✅ Completed Infrastructure (Updated January 24, 2025)
 - Next.js 14 application with App Router and TypeScript
 - TailwindCSS + ShadCN UI design system implementation  
 - Logo integration and comprehensive brand identity
@@ -236,22 +241,25 @@ git push origin feature/feature-name
 - ESLint and Prettier configuration for code quality
 - Dual repository strategy with security-focused .gitignore
 - GitHub repository setup with automated CI/CD pipeline
-- Supabase PostgreSQL integration (replacing Railway)
+- **🎉 MAJOR**: Complete Prisma database schema with 11 comprehensive models
+- **🎉 MAJOR**: Infrastructure migration from Supabase to Prisma + Clerk + Hetzner/Coolify
+- **🎉 MAJOR**: Database seeding scripts and automated setup tools
+- **🎉 MAJOR**: Full TypeScript integration with Prisma-generated types
 
-### 🔄 Current Development Focus
-- **Authentication System**: Complete Supabase Auth integration with role-based access
-- **Core Components**: GPTEmbedViewer for secure tool demonstrations
-- **Content Management**: AI tool directory with affiliate link tracking
-- **User Experience**: Responsive design with accessibility compliance
-- **Real-time Features**: Live news feed and user interaction tracking
+### 🔄 Current Development Focus (Updated January 24, 2025)
+- **Frontend Integration**: Connect React components to Prisma database
+- **Authentication UI**: Complete Clerk.dev frontend integration
+- **API Development**: Create Next.js API routes for CRUD operations
+- **Core Components**: GPTEmbedViewer, ToolDirectory, ProjectShowcase
+- **User Experience**: Role-based dashboards and personalized features
 
-### 📋 Immediate Next Steps
-1. **Database Schema**: Complete user, project, and tool table implementations
-2. **Authentication Flow**: Implement sign-up, sign-in, and role assignment
-3. **Content Population**: Add initial AI tool directory entries
+### 📋 Immediate Next Steps (Updated January 24, 2025)
+1. **API Routes**: Implement Next.js API endpoints for database operations
+2. **Authentication Components**: Complete Clerk.dev UI integration
+3. **Database-Connected Components**: Tools directory, project showcase, user dashboard
 4. **GPT Integration**: Secure iframe embedding system for custom GPTs
-5. **Analytics Setup**: PostHog integration for user behavior tracking
-6. **Performance Optimization**: Core Web Vitals compliance and optimization
+5. **Analytics Integration**: PostHog setup with database event tracking
+6. **User Features**: Favorites, reviews, affiliate link tracking
 
 ### 🎯 Strategic Objectives
 - **Community Building**: Foster an engaged community of AI tool users
