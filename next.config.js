@@ -4,7 +4,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '*.supabase.co',
+        hostname: '*.clerk.dev',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.clerk.com',
       },
       {
         protocol: 'https',
@@ -44,7 +48,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https:",
               "font-src 'self' data:",
-              "connect-src 'self' https://*.supabase.co https://app.posthog.com",
+              "connect-src 'self' https://*.clerk.dev https://app.posthog.com https://tonystoolbox.com",
               "frame-src 'self' https://chatgpt.com https://gpt.anthropic.com",
             ].join('; '),
           },

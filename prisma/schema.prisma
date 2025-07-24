@@ -1,0 +1,536 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// =============================================================================
+// 👤 USER MANAGEMENT & AUTHENTICATION
+// =============================================================================
+
+model User {
+  id          String   @id @default(cuid())
+  clerkId     String   @unique // Clerk.dev user ID
+  email       String   @unique
+  username    String?  @unique
+  firstName   String?
+  lastName    String?
+  imageUrl    String?
+  role        UserRole @default(GUEST)
+  
+  // Subscription & Access
+  subscriptionTier  SubscriptionTier @default(FREE)
+  subscriptionId    String?          // External subscription ID
+  subscriptionStart DateTime?
+  subscriptionEnd   DateTime?
+  
+  // User Preferences
+  preferences Json @default("{}")
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lastSeenAt DateTime @default(now())
+  
+  // Relations
+  projects        Project[]
+  userInteractions UserInteraction[]
+  shortLinks      ShortLink[]
+  favorites       UserFavorite[]
+  reviews         Review[]
+  
+  @@map("users")
+}
+
+enum UserRole {
+  GUEST
+  SUBSCRIBER
+  ADMIN
+}
+
+enum SubscriptionTier {
+  FREE
+  BASIC
+  PRO
+  ENTERPRISE
+}
+
+// =============================================================================
+// 🛠️ AI TOOLS DIRECTORY
+// =============================================================================
+
+model Tool {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String
+  longDescription String?
+  
+  // Tool Information
+  category    ToolCategory
+  subcategory String?
+  tags        String[]
+  
+  // URLs and Links
+  websiteUrl    String
+  logoUrl       String?
+  screenshotUrl String?
+  demoUrl       String?
+  
+  // Affiliate & Monetization
+  affiliateUrl    String?
+  affiliateCode   String?
+  commission      Float?    // Commission percentage
+  
+  // Pricing Information
+  pricing         PricingModel
+  freeTrialDays   Int?
+  startingPrice   Float?
+  currency        String    @default("USD")
+  
+  // Metadata
+  featured        Boolean   @default(false)
+  verified        Boolean   @default(false)
+  popularity      Int       @default(0)
+  rating          Float     @default(0.0)
+  totalReviews    Int       @default(0)
+  
+  // SEO
+  metaTitle       String?
+  metaDescription String?
+  
+  // Status
+  status          ToolStatus @default(DRAFT)
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  publishedAt DateTime?
+  
+  // Relations
+  reviews         Review[]
+  userInteractions UserInteraction[] @relation("UserInteractionTool")
+  favorites       UserFavorite[] @relation("UserFavoriteTool")
+  
+  @@map("tools")
+}
+
+enum ToolCategory {
+  AI_WRITING
+  AI_CODING
+  AI_DESIGN
+  AI_MARKETING
+  AI_PRODUCTIVITY
+  AI_ANALYSIS
+  AUTOMATION
+  DEVELOPMENT
+  ANALYTICS
+  CREATIVE
+  OTHER
+}
+
+enum PricingModel {
+  FREE
+  FREEMIUM
+  PAID
+  SUBSCRIPTION
+  ONE_TIME
+  USAGE_BASED
+}
+
+enum ToolStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+  UNDER_REVIEW
+}
+
+// =============================================================================
+// 🚀 AI PROJECT SHOWCASE
+// =============================================================================
+
+model Project {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String
+  longDescription String?
+  
+  // Project Details
+  category      ProjectCategory
+  tags          String[]
+  difficulty    DifficultyLevel
+  
+  // Media
+  thumbnailUrl  String?
+  imageUrls     String[]
+  videoUrl      String?
+  demoUrl       String?
+  
+  // GPT Embed Configuration
+  embedType     EmbedType?
+  embedUrl      String?
+  embedConfig   Json?      // Configuration for iframe embeds
+  
+  // Technical Details
+  techStack     String[]
+  githubUrl     String?
+  documentation String?
+  
+  // Engagement
+  featured      Boolean   @default(false)
+  views         Int       @default(0)
+  likes         Int       @default(0)
+  downloads     Int       @default(0)
+  
+  // SEO
+  metaTitle     String?
+  metaDescription String?
+  
+  // Status & Publishing
+  status        ProjectStatus @default(DRAFT)
+  publishedAt   DateTime?
+  
+  // Author
+  authorId      String
+  author        User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  userInteractions UserInteraction[] @relation("UserInteractionProject")
+  favorites        UserFavorite[] @relation("UserFavoriteProject")
+  
+  @@map("projects")
+}
+
+enum ProjectCategory {
+  AI_CHATBOTS
+  AUTOMATION_TOOLS
+  ANALYTICS_DASHBOARDS
+  CREATIVE_TOOLS
+  PRODUCTIVITY_APPS
+  MARKETING_TOOLS
+  DEVELOPMENT_TOOLS
+  EDUCATIONAL
+  EXPERIMENTAL
+  OTHER
+}
+
+enum DifficultyLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum EmbedType {
+  CUSTOM_GPT
+  CHATBOT
+  IFRAME
+  DEMO
+  INTERACTIVE
+}
+
+enum ProjectStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+  FEATURED
+}
+
+// =============================================================================
+// 🔗 SHORT LINK SYSTEM
+// =============================================================================
+
+model ShortLink {
+  id          String   @id @default(cuid())
+  slug        String   @unique // The short code (e.g., "abc123")
+  originalUrl String
+  shortUrl    String   @unique // Full short URL
+  
+  // Metadata
+  title       String?
+  description String?
+  
+  // Analytics
+  clicks      Int      @default(0)
+  lastClicked DateTime?
+  
+  // Configuration
+  active      Boolean  @default(true)
+  expiresAt   DateTime?
+  password    String?  // Optional password protection
+  
+  // Creator
+  creatorId   String?
+  creator     User?    @relation(fields: [creatorId], references: [id], onDelete: SetNull)
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  clickEvents ClickEvent[]
+  
+  @@map("short_links")
+}
+
+model ClickEvent {
+  id          String   @id @default(cuid())
+  shortLinkId String
+  shortLink   ShortLink @relation(fields: [shortLinkId], references: [id], onDelete: Cascade)
+  
+  // Analytics Data
+  ipAddress   String?
+  userAgent   String?
+  referer     String?
+  country     String?
+  city        String?
+  device      String?
+  browser     String?
+  os          String?
+  
+  // Timestamps
+  clickedAt DateTime @default(now())
+  
+  @@map("click_events")
+}
+
+// =============================================================================
+// 📰 AI NEWS FEED
+// =============================================================================
+
+model NewsItem {
+  id          String   @id @default(cuid())
+  title       String
+  summary     String?
+  content     String?
+  
+  // Source Information
+  sourceUrl   String   @unique
+  sourceName  String
+  author      String?
+  
+  // Categorization
+  category    NewsCategory
+  tags        String[]
+  
+  // Engagement
+  featured    Boolean  @default(false)
+  trending    Boolean  @default(false)
+  views       Int      @default(0)
+  
+  // SEO
+  metaTitle   String?
+  metaDescription String?
+  
+  // Publishing
+  publishedAt DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("news_items")
+}
+
+enum NewsCategory {
+  AI_RESEARCH
+  INDUSTRY_NEWS
+  PRODUCT_LAUNCHES
+  FUNDING_ROUNDS
+  REGULATIONS
+  TUTORIALS
+  OPINIONS
+  OTHER
+}
+
+// =============================================================================
+// 📊 USER INTERACTIONS & ANALYTICS
+// =============================================================================
+
+model UserInteraction {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Interaction Details
+  type        InteractionType
+  entityType  EntityType
+  entityId    String
+  
+  // Separate foreign keys for polymorphic relations
+  toolId      String?
+  projectId   String?
+  
+  // Context
+  metadata    Json?    // Additional interaction data
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  
+  // Relations
+  tool        Tool?    @relation("UserInteractionTool", fields: [toolId], references: [id], onDelete: Cascade)
+  project     Project? @relation("UserInteractionProject", fields: [projectId], references: [id], onDelete: Cascade)
+  
+  @@map("user_interactions")
+}
+
+enum InteractionType {
+  VIEW
+  CLICK
+  LIKE
+  SHARE
+  DOWNLOAD
+  BOOKMARK
+  REVIEW
+  PURCHASE
+}
+
+enum EntityType {
+  TOOL
+  PROJECT
+  NEWS_ITEM
+  PAGE
+  SHORTLINK
+}
+
+// =============================================================================
+// ⭐ REVIEWS & RATINGS
+// =============================================================================
+
+model Review {
+  id          String   @id @default(cuid())
+  rating      Int      // 1-5 stars
+  title       String?
+  content     String?
+  
+  // Relations
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  toolId      String?
+  tool        Tool?    @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  
+  // Moderation
+  approved    Boolean  @default(false)
+  flagged     Boolean  @default(false)
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([userId, toolId]) // One review per user per tool
+  @@map("reviews")
+}
+
+// =============================================================================
+// 💾 USER FAVORITES & BOOKMARKS
+// =============================================================================
+
+model UserFavorite {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  entityType  EntityType
+  entityId    String
+  
+  // Separate foreign keys for polymorphic relations
+  toolId      String?
+  projectId   String?
+  
+  // Relations
+  tool        Tool?    @relation("UserFavoriteTool", fields: [toolId], references: [id], onDelete: Cascade)
+  project     Project? @relation("UserFavoriteProject", fields: [projectId], references: [id], onDelete: Cascade)
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  
+  @@unique([userId, entityType, entityId]) // One favorite per user per entity
+  @@map("user_favorites")
+}
+
+// =============================================================================
+// 📈 ANALYTICS & TRACKING
+// =============================================================================
+
+model AnalyticsEvent {
+  id          String   @id @default(cuid())
+  
+  // Event Details
+  eventName   String
+  eventType   AnalyticsEventType
+  
+  // User Context
+  userId      String?
+  sessionId   String?
+  
+  // Technical Context
+  path        String?
+  referrer    String?
+  userAgent   String?
+  ipAddress   String?
+  
+  // Geographic Data
+  country     String?
+  region      String?
+  city        String?
+  
+  // Device Information
+  device      String?
+  browser     String?
+  os          String?
+  screenSize  String?
+  
+  // Custom Properties
+  properties  Json?
+  
+  // Timestamps
+  timestamp DateTime @default(now())
+  
+  @@map("analytics_events")
+}
+
+enum AnalyticsEventType {
+  PAGE_VIEW
+  CLICK
+  CONVERSION
+  SIGNUP
+  LOGIN
+  PURCHASE
+  CUSTOM
+}
+
+// =============================================================================
+// 🔧 SYSTEM CONFIGURATION
+// =============================================================================
+
+model SystemConfig {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String
+  type        ConfigType
+  description String?
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("system_config")
+}
+
+enum ConfigType {
+  STRING
+  NUMBER
+  BOOLEAN
+  JSON
+  URL
+}
