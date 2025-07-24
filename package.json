@@ -26,7 +26,7 @@
     "setup": "node scripts/setup-database.js"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.29.1",
+    "@clerk/nextjs": "^6.25.5",
     "@prisma/client": "^5.22.0",
     "@radix-ui/react-slot": "^1.1.1",
     "@types/node": "^20.19.9",
